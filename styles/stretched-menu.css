@@ -1,0 +1,246 @@
+/* ================= STRETCH MENU OVERLAY ================= */
+
+.stretch-menu-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    background: #0a0a0a;
+    z-index: 9999;
+    overflow: hidden;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform, opacity;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  
+  /* ================= LAYOUT ================= */
+  
+  .stretch-menu-left {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    position: relative;
+  }
+  
+  .stretch-menu-right {
+    width: 55%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transform: translateZ(0);
+    background: #0a0a0a;
+  }
+  
+  /* ================= CANVAS CONTAINER ================= */
+  
+  #stretch-canvas-container {
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+  }
+  
+  #stretch-canvas-container:active {
+    cursor: grabbing;
+  }
+  
+  #stretch-canvas-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    cursor: pointer;
+  }
+  
+  /* ================= HOVER IMAGES ================= */
+  
+  .stretch-hover-images-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .stretch-hover-image {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    width: 80px;
+    height: 80px;
+    background-image: url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4");
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+    transform: translateY(-50%) scale(0);
+    opacity: 0;
+    pointer-events: auto;
+    will-change: transform, opacity;
+  }
+  
+  /* ================= MOBILE MENU ================= */
+  
+  .stretch-menu-mobile {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    padding-left: 40px;
+    contain: layout style;
+  }
+  
+  .stretch-mobile-item {
+    position: relative;
+    font-size: 2.3rem;
+    margin-bottom: 26px;
+    opacity: 1;
+    transform: none !important;
+    letter-spacing: 0.08em;
+    padding-right: 30px;
+    transition: color 0.2s ease;
+    color: #ffffff;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 500;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: 'Anton', sans-serif;
+  }
+  
+  .stretch-mobile-item:hover {
+    color: #ff0000;
+  }
+  
+  .stretch-mobile-indicator {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    background-color: #ff0000;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .stretch-mobile-item:hover .stretch-mobile-indicator {
+    opacity: 1;
+  }
+  
+  /* ================= RIGHT SIDE CONTENT ================= */
+  
+  .stretch-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+  }
+  
+  .stretch-video-section {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .stretch-video-section video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .stretch-options-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    font-family: monospace;
+  }
+  
+  .stretch-option-btn {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: white;
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .stretch-option-btn:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ff0000;
+  }
+  
+  /* ================= CLOSE BUTTON ================= */
+  
+  .stretch-menu-close {
+    position: absolute;
+    top: 36px;
+    right: 44px;
+    background: transparent;
+    border: 0px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 0.8rem;
+    letter-spacing: 0.32em;
+    cursor: pointer;
+    z-index: 10000;
+    padding: 12px 24px;
+    transition: all 0.2s ease;
+    font-family: monospace;
+  }
+  
+  .stretch-menu-close:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ff0000;
+  }
+  
+  /* ================= RESPONSIVE ================= */
+  
+  @media (max-width: 768px) {
+    .stretch-menu-overlay {
+      flex-direction: column;
+      padding: 120px 32px;
+      cursor: default;
+    }
+  
+    .stretch-menu-left {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  
+    .stretch-menu-mobile {
+      max-width: none;
+      padding-left: 0;
+    }
+    
+    .stretch-mobile-item {
+      padding-right: 0;
+    }
+  
+    .stretch-menu-right {
+      display: none;
+    }
+    
+    .stretch-menu-close {
+      top: 24px;
+      right: 24px;
+      padding: 10px 20px;
+    }
+  }
+  
+  /* ================= ANTON FONT ================= */
+  
+  @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');

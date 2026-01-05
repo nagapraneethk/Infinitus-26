@@ -1,0 +1,677 @@
+// Register GSAP plugins
+        // Register GSAP plugins
+        gsap.registerPlugin(Draggable, gsap.plugins.InertiaPlugin);
+
+        // Noise Component Class
+        class Noise {
+            constructor(options = {}) {
+                this.options = {
+                    patternSize: options.patternSize || 500,
+                    patternScaleX: options.patternScaleX || 1,
+                    patternScaleY: options.patternScaleY || 1,
+                    patternRefreshInterval: options.patternRefreshInterval || 10,
+                    patternAlpha: options.patternAlpha || 255
+                };
+                
+                this.canvas = null;
+                this.ctx = null;
+                this.frame = 0;
+                this.animationId = null;
+                this.canvasSize = 1024;
+                
+                this.init();
+            }
+            
+            init() {
+                // Create canvas element
+                this.canvas = document.createElement('canvas');
+                this.canvas.className = 'grain-canvas';
+                this.canvas.style.imageRendering = 'pixelated';
+                
+                // Add to noise container
+                const noiseContainer = document.getElementById('noise-container');
+                if (noiseContainer) {
+                    noiseContainer.appendChild(this.canvas);
+                }
+                
+                // Get context
+                this.ctx = this.canvas.getContext('2d', { alpha: true });
+                if (!this.ctx) return;
+                
+                // Start animation
+                this.setupCanvas();
+                this.startAnimation();
+                
+                // Handle resize
+                window.addEventListener('resize', this.handleResize.bind(this));
+            }
+            
+            setupCanvas() {
+                if (!this.canvas || !this.ctx) return;
+                
+                this.canvas.width = this.canvasSize;
+                this.canvas.height = this.canvasSize;
+                
+                this.canvas.style.width = '100vw';
+                this.canvas.style.height = '100vh';
+            }
+            
+            drawGrain() {
+                if (!this.ctx) return;
+                
+                const imageData = this.ctx.createImageData(this.canvasSize, this.canvasSize);
+                const data = imageData.data;
+                
+                // Create noise pattern
+                for (let i = 0; i < data.length; i += 4) {
+                    const value = Math.random() * 255;
+                    data[i] = value;         // R
+                    data[i + 1] = value;     // G
+                    data[i + 2] = value;     // B
+                    data[i + 3] = this.options.patternAlpha; // A
+                }
+                
+                this.ctx.putImageData(imageData, 0, 0);
+            }
+            
+            animate() {
+                if (this.frame % this.options.patternRefreshInterval === 0) {
+                    this.drawGrain();
+                }
+                this.frame++;
+                this.animationId = window.requestAnimationFrame(this.animate.bind(this));
+            }
+            
+            startAnimation() {
+                this.animate();
+            }
+            
+            stopAnimation() {
+                if (this.animationId) {
+                    window.cancelAnimationFrame(this.animationId);
+                }
+            }
+            
+            handleResize() {
+                this.setupCanvas();
+            }
+            
+            updateOptions(newOptions) {
+                this.options = { ...this.options, ...newOptions };
+            }
+            
+            destroy() {
+                this.stopAnimation();
+                window.removeEventListener('resize', this.handleResize.bind(this));
+                if (this.canvas && this.canvas.parentNode) {
+                    this.canvas.parentNode.removeChild(this.canvas);
+                }
+            }
+        }
+        
+        // Video files array
+        const VIDEOS = [
+            "/assets/videos/video-01.mp4",
+            "/assets/videos/video-02.mp4",
+            "/assets/videos/video-03.mp4"
+        ];
+        
+        // State variables
+        let currentVideo = 0;
+        let isTransitioning = false;
+        let scrollAccumulator = 0;
+        let menuOpen = false;
+        let activeIndex = 0;
+        let isMenuClosing = false;
+        
+        const SCROLL_THRESHOLD = 120;
+        const SCROLL_END_DELAY = 2000;
+        let scrollLocked = false;
+        let scrollEndTimer = null;
+        
+        // DOM elements
+        const mainContainer = document.getElementById('main-container');
+        const windowsContainer = document.getElementById('windows-container');
+        const scrollIndicators = document.getElementById('scroll-indicators');
+        const menuButton = document.getElementById('menu-button');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const menuClose = document.getElementById('menu-close');
+        const registerButton = document.getElementById('register-button');
+        
+        // Windows array
+        let windows = [];
+        let noiseInstance = null;
+        
+        // Initialize the application
+        function init() {
+            // Initialize noise effect with your exact parameters
+            noiseInstance = new Noise({
+                patternSize: 250,
+                patternScaleX: 1,
+                patternScaleY: 1,
+                patternRefreshInterval: 2,
+                patternAlpha: 15
+            });
+            
+            // Create scroll indicators
+            createScrollIndicators();
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Spawn windows after a short delay
+            setTimeout(spawnWindows, 500);
+            
+            // Update active indicator
+            updateActiveIndicator();
+        }
+        
+        // Create scroll indicators
+        function createScrollIndicators() {
+            scrollIndicators.innerHTML = '';
+            
+            for (let i = 0; i < VIDEOS.length; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = `scroll-indicator ${i === activeIndex ? 'active' : 'inactive'}`;
+                indicator.dataset.index = i;
+                scrollIndicators.appendChild(indicator);
+            }
+        }
+        
+        // Update active scroll indicator
+        function updateActiveIndicator() {
+            const indicators = document.querySelectorAll('.scroll-indicator');
+            indicators.forEach((indicator, index) => {
+                indicator.className = `scroll-indicator ${index === activeIndex ? 'active' : 'inactive'}`;
+            });
+        }
+        
+        // Set up event listeners
+        function setupEventListeners() {
+            // Wheel event for scrolling
+            window.addEventListener('wheel', handleWheel, { passive: false });
+            
+            // Menu button
+            menuButton.addEventListener('click', openMenu);
+            
+            // Menu close button
+            menuClose.addEventListener('click', closeMenu);
+            
+            // Register button
+            registerButton.addEventListener('click', () => {
+                window.open('https://register.infinitus.com', '_blank');
+            });
+            
+            // Close menu on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && menuOpen && !isMenuClosing) {
+                    closeMenu();
+                }
+            });
+            
+            // Close menu when clicking on menu overlay background (not on content)
+            menuOverlay.addEventListener('click', (e) => {
+                if (e.target === menuOverlay && menuOpen && !isMenuClosing) {
+                    closeMenu();
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                // If windows exist, respawn them with new positions
+                if (windows.length > 0) {
+                    clearWindows();
+                    setTimeout(spawnWindows, 100);
+                }
+            });
+        }
+        
+        // Open menu function
+        function openMenu() {
+            if (isMenuClosing) return;
+            
+            menuOpen = true;
+            isMenuClosing = false;
+            
+            // Remove closing class if it exists
+            menuOverlay.classList.remove('closing');
+            
+            // Hide menu button immediately
+            menuButton.style.opacity = '0';
+            menuButton.style.pointerEvents = 'none';
+            
+            // Add active class after a tiny delay to ensure CSS reset
+            setTimeout(() => {
+                menuOverlay.classList.add('active');
+            }, 10);
+            
+            // Disable main scroll when menu is open
+            scrollLocked = true;
+            
+            // Play menu video if available
+            const menuVideo = document.querySelector('.menu-video');
+            if (menuVideo) {
+                menuVideo.play().catch(e => {
+                    console.log('Menu video play failed:', e);
+                });
+            }
+        }
+        
+        // Close menu function
+        function closeMenu() {
+            if (!menuOpen || isMenuClosing) return;
+            
+            isMenuClosing = true;
+            
+            // Start closing animation
+            menuOverlay.classList.add('closing');
+            menuOverlay.classList.remove('active');
+            
+            // Show menu button with delay
+            setTimeout(() => {
+                menuButton.style.opacity = '1';
+                menuButton.style.pointerEvents = 'auto';
+            }, 400);
+            
+            // Pause menu video if available
+            const menuVideo = document.querySelector('.menu-video');
+            if (menuVideo) {
+                menuVideo.pause();
+            }
+            
+            // Wait for animation to complete before resetting state
+            setTimeout(() => {
+                menuOpen = false;
+                isMenuClosing = false;
+                menuOverlay.classList.remove('closing');
+                
+                // Re-enable main scroll when menu is closed
+                scrollLocked = false;
+            }, 900); // Match this to your longest animation duration
+        }
+        
+        // Handle wheel event for media navigation
+        function handleWheel(e) {
+            // Don't handle scroll if menu is open or closing
+            if (menuOpen || isMenuClosing || scrollLocked) return;
+            
+            e.preventDefault();
+            
+            if (scrollLocked || isTransitioning) {
+                if (scrollEndTimer) clearTimeout(scrollEndTimer);
+                scrollEndTimer = setTimeout(() => {
+                    scrollLocked = false;
+                    scrollEndTimer = null;
+                }, SCROLL_END_DELAY);
+                return;
+            }
+            
+            scrollAccumulator += e.deltaY;
+            
+            if (Math.abs(scrollAccumulator) > SCROLL_THRESHOLD) {
+                scrollLocked = true;
+                if (scrollEndTimer) { clearTimeout(scrollEndTimer); scrollEndTimer = null; }
+                
+                isTransitioning = true;
+        
+                const direction = scrollAccumulator > 0 ? 1 : -1;
+                let next = currentVideo + direction;
+                
+                if (next >= VIDEOS.length) next = 0;
+                if (next < 0) next = VIDEOS.length - 1;
+                
+                // First hide windows with staggered animation
+                hideWindowsStaggered(70);
+                
+                // Update current video
+                currentVideo = next;
+                activeIndex = next;
+                scrollAccumulator = 0;
+                updateActiveIndicator();
+        
+                // Then spawn new windows after delay
+                setTimeout(() => {
+                    spawnWindows();
+                    isTransitioning = false;
+                    
+                    scrollEndTimer = setTimeout(() => {
+                        scrollLocked = false;
+                        scrollEndTimer = null;
+                    }, SCROLL_END_DELAY);
+                }, 650);
+            }
+        }
+        
+        // Create a draggable window with video
+        function createWindow(x, y, w, h, delay = 0) {
+            const container = windowsContainer;
+            if (!container) return;
+        
+            const cx = container.offsetWidth / 2 - w / 2;
+            const cy = container.offsetHeight / 2 - h / 2;
+        
+            const win = document.createElement("div");
+            win.className = "window";
+            win.style.width = w + "px";
+            win.style.height = h + "px";
+            
+            const xPadded = Math.round(x).toString().padStart(4, '0');
+            const yPadded = Math.round(y).toString().padStart(4, '0');
+            
+            win.innerHTML = `
+                <div class="window-header">X:${xPadded}px Y:${yPadded}px</div>
+                <div class="window-content">
+                    <div class="window-view">
+                        <video autoplay muted loop playsinline>
+                            <source src="${VIDEOS[currentVideo]}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            `;
+        
+            container.appendChild(win);
+            windows.push(win);
+        
+            const view = win.querySelector(".window-view");
+            const video = win.querySelector("video");
+            
+            // Handle video loading and playback
+            if (video) {
+                video.addEventListener('loadeddata', () => {
+                    video.play().catch(e => {
+                        console.log('Video play failed:', e);
+                    });
+                });
+                
+                video.addEventListener('error', (e) => {
+                    console.error('Video error:', e);
+                    // Fallback to background color if video fails
+                    view.style.backgroundColor = '#1a1a1a';
+                });
+                
+                // iOS Safari fix for autoplay
+                video.setAttribute('playsinline', '');
+                video.setAttribute('webkit-playsinline', '');
+            }
+        
+            // Set initial position and animation
+            gsap.set(win, { x: x, y: y, scale: 0, opacity: 1 });
+            win.style.transformOrigin = '0 0';
+        
+            const headerEl = win.querySelector('.window-header');
+            if (headerEl) {
+                headerEl.style.opacity = '0';
+                headerEl.style.transformOrigin = '0 0';
+            }
+        
+            // Set initial view position
+            gsap.set(view, { x: -x, y: -y });
+        
+            let currentX = x;
+            let currentY = y;
+            let targetX = x;
+            let targetY = y;
+            
+            const tickerCallback = () => {
+                currentX += (targetX - currentX) * 0.15;
+                currentY += (targetY - currentY) * 0.15;
+                
+                gsap.set(win, { x: currentX, y: currentY });
+                view.style.transform = `translate(${-currentX}px, ${-currentY}px)`;
+                updateCoordinates(win, currentX, currentY);
+            };
+            
+            gsap.ticker.add(tickerCallback);
+        
+            // Make window draggable
+            const dragInstances = Draggable.create(win, {
+                type: "x,y",
+                bounds: container,
+                inertia: true,
+                allowEventDefault: true,
+                onDrag: function() {
+                    targetX = this.x;
+                    targetY = this.y;
+                    gsap.set(this.target, { x: currentX, y: currentY });
+                },
+            });
+        
+            const dragInstance = dragInstances && dragInstances[0];
+        
+            // Store cleanup function
+            win._cleanup = () => {
+                try { 
+                    if (video) {
+                        video.pause();
+                        video.removeAttribute('src');
+                        video.load();
+                    }
+                } catch (e) {}
+                try { gsap.ticker.remove(tickerCallback); } catch (e) {}
+                try { if (dragInstance && typeof dragInstance.kill === 'function') dragInstance.kill(); } catch (e) {}
+                try { gsap.killTweensOf(win); } catch (e) {}
+            };
+            
+            return win;
+        }
+        
+        // Update coordinates in window header
+        function updateCoordinates(win, x, y) {
+            const header = win.querySelector('.window-header');
+            if (header) {
+                const xPadded = Math.round(x).toString().padStart(4, '0');
+                const yPadded = Math.round(y).toString().padStart(4, '0');
+                header.textContent = `X:${xPadded}px Y:${yPadded}px`;
+            }
+        }
+        
+        // Clear all windows
+        function clearWindows() {
+            windows.forEach((w) => {
+                try { w._cleanup && w._cleanup(); } catch (e) {}
+                try { w.remove(); } catch (e) {}
+            });
+            windows = [];
+        }
+        
+        // Hide windows with staggered animation
+        function hideWindowsStaggered(interval = 80) {
+            const wins = [...windows];
+            wins.forEach((win, i) => {
+                setTimeout(() => {
+                    try { win._cleanup && win._cleanup(); } catch (e) {}
+                    gsap.to(win, { 
+                        opacity: 0, 
+                        scale: 0.96, 
+                        duration: 0.06, 
+                        ease: 'power1.out', 
+                        onComplete: () => {
+                            try { win.remove(); } catch (e) {}
+                            const idx = windows.indexOf(win);
+                            if (idx > -1) windows.splice(idx, 1);
+                        }
+                    });
+                }, i * interval);
+            });
+        }
+        
+        // Spawn windows in random positions
+        function spawnWindows() {
+            const container = windowsContainer;
+            if (!container) return;
+        
+            const containerW = container.offsetWidth;
+            const containerH = container.offsetHeight;
+            const rem = 16;
+            const aspect = 9 / 16;
+        
+            let w1 = Math.round(containerW * 0.39);
+            let h1 = Math.round(w1 * aspect);
+        
+            let w2 = Math.round(containerW * 0.695);
+            let h2 = Math.round(w2 * aspect);
+        
+            if (w2 > w1) {
+                w2 = Math.round(w2 * 0.85);
+                h2 = Math.round(w2 * aspect);
+                w1 = Math.round(w1 * 0.9);
+                h1 = Math.round(w1 * aspect);
+            } else {
+                w1 = Math.round(w1 * 0.85);
+                h1 = Math.round(w1 * aspect);
+                w2 = Math.round(w2 * 0.9);
+                h2 = Math.round(w2 * aspect);
+            }
+        
+            const w3 = Math.round(18 * rem * 0.9);
+            const h3 = Math.round(w3 * aspect);
+        
+            const w4 = Math.round(40 * rem * 0.9);
+            const h4 = Math.round(w4 * aspect);
+        
+            const w5 = Math.round(40 * rem * 0.9);
+            const h5 = Math.round(w5 * aspect);
+        
+            const w6 = Math.round(24 * rem * 0.9);
+            const h6 = Math.round(w6 * aspect);
+        
+            const placed = [];
+            const pad = Math.round(rem * 1.5);
+            
+            function placeWithLimitedOverlap(w, h) {
+                let tries = 0;
+                const MAX_TRIES = 30;
+                const MAX_OVERLAP_FRAC = 0.5;
+        
+                function overlapFraction(x, y, r) {
+                    const overlapX = Math.max(0, Math.min(x + w, r.x + r.w) - Math.max(x, r.x));
+                    const overlapY = Math.max(0, Math.min(y + h, r.y + r.h) - Math.max(y, r.y));
+                    const overlapArea = overlapX * overlapY;
+                    if (overlapArea <= 0) return 0;
+                    const minArea = Math.min(w * h, r.w * r.h);
+                    return overlapArea / minArea;
+                }
+        
+                const maxXRange = Math.max(0, containerW - pad * 2 - w);
+                const maxYRange = Math.max(0, containerH - pad * 2 - h);
+        
+                while (tries < MAX_TRIES) {
+                    const x = Math.round(pad + Math.random() * maxXRange);
+                    const y = Math.round(pad + Math.random() * maxYRange);
+                    let ok = true;
+                    for (const r of placed) {
+                        if (overlapFraction(x, y, r) > MAX_OVERLAP_FRAC) {
+                            ok = false;
+                            break;
+                        }
+                    }
+                    if (ok) {
+                        placed.push({ x: x, y: y, w: w, h: h });
+                        return { x: x, y: y };
+                    }
+                    tries++;
+                }
+        
+                let best = { x: pad, y: pad, worst: Infinity };
+                for (let i = 0; i < 50; i++) {
+                    const x = Math.round(pad + Math.random() * maxXRange);
+                    const y = Math.round(pad + Math.random() * maxYRange);
+                    let worstFrac = 0;
+                    for (const r of placed) {
+                        const frac = overlapFraction(x, y, r);
+                        if (frac > worstFrac) worstFrac = frac;
+                    }
+                    if (worstFrac < best.worst) best = { x: x, y: y, worst: worstFrac };
+                }
+                placed.push({ x: best.x, y: best.y, w: w, h: h });
+                return { x: best.x, y: best.y };
+            }
+        
+            const specs = [
+                { w: w1, h: h1 },
+                { w: w2, h: h2 },
+                { w: w3, h: h3 },
+                { w: w4, h: h4 },
+                { w: w5, h: h5 },
+                { w: w6, h: h6 },
+            ];
+        
+            clearWindows();
+        
+            specs.forEach((s, i) => {
+                const pos = placeWithLimitedOverlap(s.w, s.h);
+                createWindow(pos.x, pos.y, s.w, s.h, i * 0.12);
+            });
+        
+            const newWins = [...windows];
+            const headers = newWins.map(w => w.querySelector('.window-header')).filter(Boolean);
+        
+            // Animate windows in
+            if (headers.length) {
+                gsap.to(headers, {
+                    opacity: 1,
+                    duration: 0,
+                    stagger: 0.04,
+                    onComplete: () => {
+                        newWins.forEach(w => { w.style.transformOrigin = '0 0'; });
+                        gsap.set(newWins, { y: -12, scale: 0 });
+                        gsap.fromTo(newWins,
+                            { y: -12, scale: 0 },
+                            {
+                                y: 0,
+                                scale: 1,
+                                duration: 1.4,
+                                ease: 'power3.out',
+                                stagger: 0.08,
+                            }
+                        );
+                    },
+                });
+            } else {
+                gsap.set(newWins, { y: -12, scale: 0 });
+                gsap.fromTo(newWins,
+                    { y: -12, scale: 0 },
+                    {
+                        y: 0,
+                        scale: 1,
+                        duration: 1.4,
+                        ease: 'power3.out',
+                        stagger: 0.08,
+                    }
+                );
+            }
+        }
+        
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+        
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+            if (noiseInstance) {
+                noiseInstance.destroy();
+            }
+            // Clean up all windows
+            clearWindows();
+        });
+        
+        // Handle page visibility change (for video autoplay)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // Pause all videos when page is hidden
+                document.querySelectorAll('video').forEach(video => {
+                    video.pause();
+                });
+            } else {
+                // Try to play videos when page becomes visible again
+                setTimeout(() => {
+                    document.querySelectorAll('video').forEach(video => {
+                        if (video.paused && video.muted) {
+                            video.play().catch(e => {
+                                console.log('Video autoplay failed on visibility change:', e);
+                            });
+                        }
+                    });
+                }, 300);
+            }
+        });
+        

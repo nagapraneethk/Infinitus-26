@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infinitus '25</title>
+    <link id="favicon" rel="icon" type="image/webp" href="./favicon/7.webp" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="/styles/res.css" />
+    <link rel="stylesheet" href="./styles/landing.css" />
+    
+    <!-- Stretch Menu CSS -->
+    <link rel="stylesheet" href="./styles/stretched-menu.css" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&family=Anton&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.cdnfonts.com/css/monument-extended"
+      rel="stylesheet"
+    />
+
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "t2frh4w205");
+    </script>
+  </head>
+
+  <body class="landing-page">
+    <img src="/assets/noise-2.gif" class="noise" />
+
+    <div class="section-1">
+      <!-- <nav class="navbar href-music">
+        <div class="navbar-left">
+          
+          <a href="/public/landing.html" class="nav-logo">
+            <img src="/imgs/official.webp" alt="Logo" class="logo" />
+          </a>
+         
+          <a
+            href="https://www.google.com/search?q=srm+ap+&sca_esv=37b8e5acbf81c988&sxsrf=ADLYWIL5sVBdyU7Lw-a7R9cV0T3xBOKLEg%3A1736312214056&ei=lgV-Z8eNA4uW4-EPv4m-0Qw&ved=0ahUKEwjHsPOFq-WKAxULyzgGHb-EL8oQ4dUDCBA&uact=5&oq=srm+ap+&gs_lp=Egxnd3Mtd2l6LXNlcnAiB3NybSBhcCAyChAjGIAEGCcYigUyBRAAGIAEMgUQABiABDIFEC4YgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgoQABiABBgUGIcCMgUQABiABEi3BlDQBFjQBHACeAGQAQCYAVigAVqqAQExuAEDyAEA-AEBmAIDoAJgwgIKEAAYsAMY1gQYR8ICDRAuGIAEGLADGEMYigWYAwCIBgGQBgmSBwEzoAfyCA&sclient=gws-wiz-serp"
+            class="nav-link"
+            id="timeDisplay"
+          ></a>
+        </div>
+        <div class="navbar-right">
+          <div class="navbar-effect">
+           
+            <a href="#" class="nav-link href-music" onclick="openStretchMenu(); return false;">Menu</a>
+          </div>
+        </div>
+      </nav> -->
+
+      <!-- Hidden SVG for filter -->
+      <div class="bg-image">
+        <div class="svg-defs">
+          <svg>
+            <defs>
+              <filter id="frosted-glass">
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.04"
+                  numOctaves="3"
+                  result="noise"
+                />
+                <feDisplacementMap
+                  in="SourceGraphic"
+                  in2="noise"
+                  scale="6"
+                  xChannelSelector="R"
+                  yChannelSelector="G"
+                />
+              </filter>
+            </defs>
+          </svg>
+        </div>
+        <!-- Header -->
+        <div class="header">
+          <div class="header-title">INFINITUS</div>
+          <!-- Changed to open stretch menu -->
+          <button class="menu-button" id="menu-button" aria-label="Open menu" onclick="openStretchMenu()">
+            MENU
+          </button>
+        </div>
+
+        <!-- NEW MENU OVERLAY -->
+        <div class="menu-overlay" id="menu-overlay">
+          <!-- Red Slide -->
+          <div class="red-slide"></div>
+
+          <!-- Menu Content -->
+          <div class="menu-content">
+            <!-- Left Side Menu Options -->
+            <div class="menu-left">
+              <a href="#" class="menu-left-item">Home</a>
+              <a href="#" class="menu-left-item">Events</a>
+              <a href="#" class="menu-left-item">Proshows</a>
+              <a href="#" class="menu-left-item">About</a>
+              <a href="#" class="menu-left-item">Team</a>
+              <a href="#" class="menu-left-item">Hacksrm</a>
+              <a href="#" class="menu-left-item">FAQs</a>
+            </div>
+
+            <!-- Right Side Content -->
+            <div class="menu-right">
+              <!-- Close Button -->
+              <button class="menu-close" id="menu-close">CLOSE</button>
+
+              <!-- Video Container -->
+              <div class="menu-video-container">
+                <video class="menu-video" autoplay muted loop>
+                  <source src="/videos/video-01.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+
+              <!-- Bottom Options -->
+              <div class="menu-bottom-options">
+                <a href="#" class="menu-bottom-item">option 1</a>
+                <a href="#" class="menu-bottom-item">option 2</a>
+                <a href="#" class="menu-bottom-item">option 3</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Container -->
+        <div class="main-container" id="main-container">
+          <!-- Background Layers -->
+          <div class="background-image"></div>
+          <div class="dark-overlay-1"></div>
+          <div class="dark-overlay-2"></div>
+
+          <!-- Noise Effect Container -->
+          <div class="noise-container" id="noise-container"></div>
+
+          <!-- Windows Container -->
+          <div class="windows-container" id="windows-container"></div>
+
+          <!-- Bottom Left Content -->
+          <div class="bottom-left-content">
+            <div class="content-block">
+              <div class="national-text">NATIONAL</div>
+              <div class="techno-text">TECHNO-CULTURAL</div>
+              <div class="fest-text">
+                FEST<span class="fest-apostrophe">'</span>26
+              </div>
+              <button class="register-button" id="register-button">
+                Register Now
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Right Location -->
+          <div class="location-text">Amaravati, IN</div>
+
+          <!-- Right Side Coordinates -->
+          <div class="coordinates-container">
+            <div class="coordinates-text">
+              <span class="coord-number">16.433</span>
+              <span class="coord-symbol">°N, </span>
+              <span class="coord-number">80.550</span>
+              <span class="coord-symbol">°E</span>
+            </div>
+          </div>
+
+          <!-- Scroll Indicators -->
+          <div class="scroll-indicators" id="scroll-indicators">
+            <!-- Indicators will be generated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= STRETCH MENU OVERLAY ================= -->
+    <div class="stretch-menu-overlay" id="stretch-menu-overlay">
+      <!-- Left Side: 3D Canvas or Mobile Menu -->
+      <div class="stretch-menu-left">
+        <!-- Desktop: Three.js Canvas -->
+        <div id="stretch-canvas-container"></div>
+        
+        <!-- Mobile: Simple Menu -->
+        <div class="stretch-menu-mobile"></div>
+        
+        <!-- Hover Images Overlay (Desktop Only) -->
+        <div class="stretch-hover-images-container" id="stretch-hover-images"></div>
+      </div>
+
+      <!-- Right Side: Video & Options (Desktop Only) -->
+      <div class="stretch-menu-right">
+        <div class="stretch-content-wrapper">
+          <!-- Video Section -->
+          <div class="stretch-video-section">
+            <video autoplay loop muted playsinline>
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+            </video>
+          </div>
+          
+          <!-- Options Below Video -->
+          <div class="stretch-options-section">
+            <button class="stretch-option-btn">OPTION 01</button>
+            <button class="stretch-option-btn">OPTION 02</button>
+            <button class="stretch-option-btn">OPTION 03</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Close Button -->
+      <button class="stretch-menu-close" id="stretch-menu-close">CLOSE</button>
+    </div>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/InertiaPlugin.min.js"></script>
+    
+
+    <!-- Three.js for Stretch Menu -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script src="/scripts/landing.js"></script>
+    <script src="/scripts/cursor.js"></script>
+    <script src="/scripts/time.js"></script>
+    <script src="/scripts/text-animations.js"></script>
+    <script src="/scripts/link-hover.js"></script>
+    
+    <!-- Stretch Menu Script -->
+    <script src="/scripts/stretch-menu.js"></script>
+  </body>
+</html>

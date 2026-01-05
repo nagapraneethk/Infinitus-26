@@ -1,0 +1,15 @@
+{
+    "rewrites": [
+      { "source": "/index", "destination": "/index.html" },
+      { "source": "/aboutus", "destination": "/public/aboutus.html" },
+      { "source": "/proshows", "destination": "/public/proshows.html" },
+      { "source": "/events", "destination": "/public/Events.html" },
+      { "source": "/teams", "destination": "/public/teams.html" },
+      { "source": "/faq", "destination": "/public/faq.html" },
+      { "source": "/cultural", "destination": "/public/cultural-events.html" },
+      { "source": "/non-technical", "destination": "/public/non-technical.html" },
+      { "source": "/technical", "destination": "/public/technical-events.html" }
+      
+    ]
+  }
+  
