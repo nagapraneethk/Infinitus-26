@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cultural Events</title>
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../styles/res.css" />
@@ -12,264 +11,329 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.cdnfonts.com/css/monument-extended" rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.cdnfonts.com/css/monument-extended"
+      rel="stylesheet"
+    />
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script type="text/javascript">
-        (function (c, l, a, r, i, t, y) {
-            c[a] =
-                c[a] ||
-                function () {
-                    (c[a].q = c[a].q || []).push(arguments);
-                };
-            t = l.createElement(r);
-            t.async = 1;
-            t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0];
-            y.parentNode.insertBefore(t, y);
-        })(window, document, "clarity", "script", "t2frh4w205");
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "t2frh4w205");
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="main-content">
+      <div class="events-loader">
+        <img src="/assets/noise-2.gif" class="noise" />
+        <div class="ev-one">Cultural<br />Events</div>
 
-        <div class="events-loader">
-            <img src="/assets/noise-2.gif" class="noise">
-            <div class="ev-one">Cultural<br>Events</div>
-
-            <div class="h-scroll laptop-scroll-text">
-                Navigate by scrolling to discover events.
-            </div>
-
-            <div class="h-scroll phone-scroll-text">
-                Navigate by scrolling sideways to discover events.
-            </div>
-
-            <div class="items">
-
-            </div>
+        <div class="h-scroll laptop-scroll-text">
+          Navigate by scrolling to discover events.
         </div>
 
-        <div class="section-1">
-
-            <img src="../assets/noise-2.gif" class="noise">
-            <audio id="hover-music" src="./music/link-music.wav" preload="auto"></audio>
-            <div id="flicker" class="scroll-text">
-                Scroll
-            </div>
-
-            <div class="h-scroll-fix laptop-scroll-text">
-                Navigate by scrolling to discover events.
-            </div>
-
-            <div class="h-scroll-fix phone-scroll-text">
-                Navigate by scrolling sideways to discover events.
-            </div>
-
-            <!-- Header -->
-            <nav class="navbar href-music">
-                <div class="navbar-left">
-                    <!-- Logo Link -->
-                    <a href="../index.html" class="nav-logo">
-                        <img src="/imgs/official.webp" alt="Logo" class="logo" />
-                    </a>
-                    <!-- Navigation Links -->
-                    <a href="https://www.google.com/search?q=srm+ap+&sca_esv=37b8e5acbf81c988&sxsrf=ADLYWIL5sVBdyU7Lw-a7R9cV0T3xBOKLEg%3A1736312214056&ei=lgV-Z8eNA4uW4-EPv4m-0Qw&ved=0ahUKEwjHsPOFq-WKAxULyzgGHb-EL8oQ4dUDCBA&uact=5&oq=srm+ap+&gs_lp=Egxnd3Mtd2l6LXNlcnAiB3NybSBhcCAyChAjGIAEGCcYigUyBRAAGIAEMgUQABiABDIFEC4YgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgoQABiABBgUGIcCMgUQABiABEi3BlDQBFjQBHACeAGQAQCYAVigAViqAQExuAEDyAEA-AEBmAIDoAJgwgIKEAAYsAMY1gQYR8ICDRAuGIAEGLADGEMYigWYAwCIBgGQBgmSBwEzoAfyCA&sclient=gws-wiz-serp"
-                        class="nav-link" id="timeDisplay"></a>
-                </div>
-                <div class="navbar-right">
-                    <div class="navbar-effect">
-                        <a href="#" class="nav-link href-music menu-button" id="menu-button"
-                            aria-label="Open menu">Menu</a>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- NEW MENU OVERLAY -->
-            <div class="menu-overlay" id="menu-overlay">
-                <!-- Red Slide -->
-                <div class="red-slide"></div>
-
-                <!-- Menu Content -->
-                <div class="menu-content">
-                    <!-- Left Side Menu Options -->
-                    <div class="menu-left">
-                        <div class="menu-item">
-                            <div class="menu-item-link">
-                                <div class="bg-hover"></div>
-                                <a href="../index.html" class="menu-left-item">Home</a>
-                            </div>
-                            <!-- <span>01</span> -->
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-link">
-                                <div class="bg-hover"></div>
-                                <a href="Events.html" class="menu-left-item">Events</a>
-                            </div>
-                            <!-- <span>02</span> -->
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-link">
-                                <div class="bg-hover"></div>
-                                <a href="proshows.html" class="menu-left-item">Proshows</a>
-                            </div>
-                            <!-- <span>03</span> -->
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-link">
-                                <div class="bg-hover"></div>
-                                <a href="aboutus.html" class="menu-left-item">About</a>
-                            </div>
-                            <!-- <span>04</span> -->
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-link">
-                                <div class="bg-hover"></div>
-                                <a href="teams.html" class="menu-left-item">Team</a>
-                            </div>
-                            <!-- <span>05</span> -->
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-link">
-                                <div class="bg-hover"></div>
-                                <a href="https://hacksrm25.vercel.app/" class="menu-left-item">Hacksrm</a>
-                            </div>
-                            <!-- <span>06</span> -->
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-link">
-                                <div class="bg-hover"></div>
-                                <a href="faq.html" class="menu-left-item">FAQs</a>
-                            </div>
-                            <!-- <span>07</span> -->
-                        </div>
-                    </div>
-
-                    <!-- Right Side Content -->
-                    <div class="menu-right">
-                        <!-- Close Button -->
-                        <button class="menu-close" id="menu-close">CLOSE</button>
-
-                        <!-- Video Container -->
-                        <div class="menu-video-container">
-                            <video class="menu-video" autoplay muted loop>
-                                <source src="/assets/videos/video-01.mp4" type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-
-                        <!-- Bottom Options -->
-                        <div class="menu-bottom-options">
-                            <a href="#" class="menu-bottom-item">option 1</a>
-                            <a href="#" class="menu-bottom-item">option 2</a>
-                            <a href="#" class="menu-bottom-item">option 3</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- content goes here -->
-
-            <div class="slider">
-                <div class="slider-wrapper">
-                    <!-- Original slides (we will clone them dynamically) -->
-                    <div class="slide" data-title="Cyber Sway"
-                        data-desc="A national-level dance competition celebrating creativity and expression. From classical solos to high-energy western group acts, participants showcase diverse styles. The stage is set for artistry, passion, and innovation to shine. Bring your best moves and mesmerize the crowd. Dance your way to glory at INFINITUS!"
-                        data-img="/Posters/Cybersway.webp" data-img2="./assets/img2.webp">
-                        <img src="/Posters/Cybersway.webp" alt="img1" class="slide-link" />
-                        <a href="https://www.canva.com/design/DAGboj7tDbE/F3lgkvXe1lQbZqiZiv6CrA/view?utm_content=DAGboj7tDbE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc3341a9ace"
-                            target="_blank" class="rule-link">[ Register ]</a>
-                        <div class="slide-link">View</div>
-                    </div>
-                    <div class="slide" data-title="Cyber Groove' 25"
-                        data-desc="An electrifying music competition hosted by OneHeart, SRM's Music Club. This platform brings together talent from across genres like classical, pop, rock, and fusion. Experience soul-stirring performances that celebrate rhythm and harmony. A stage for aspiring musicians to shine. Let music echo your passion at INFINITUS!"
-                        data-img="/Posters/Cyber groove.webp" data-img2="./assets/img3.webp">
-                        <img src="/Posters/Cyber groove.webp" class="slide-link" alt="img2" />
-                        <a href="https://www.canva.com/design/DAGbojHwYRU/ftn0O_2rLWTFxSYLXdUZqw/view?utm_content=DAGbojHwYRU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hea4cd578c3"
-                            target="_blank" class="rule-link">[ Register ]</a>
-                        <div class="slide-link">View</div>
-
-
-                    </div>
-                    <div class="slide" data-title="Cyber Vogue"
-                        data-desc="A fashion walk competition celebrating style, individuality, and confidence. Participants flaunt their unique flair through themed rounds like Cyberpunk Fusion and Rapid-Fire Fashion. From power walks to creative talents, this event highlights bold personalities. A celebration of self-expression and creativity. Walk the runway, own the stage, and dazzle the crowd!"
-                        data-img="/Posters/Cyber vogue.webp" data-img2="./assets/img4.webp">
-                        <img src="/Posters/Cyber vogue.webp" class="slide-link" alt="img3" />
-                        <a href="https://www.canva.com/design/DAGbouseUNo/t0YSF3PsXyUQ2kXdQKDUVg/view?utm_content=DAGbouseUNo&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h58ef2f0f30"
-                            target="_blank" class="rule-link">[ Register ]</a>
-                        <div class="slide-link">View</div>
-                    </div>
-
-                    <div class="slide" data-title="The Glitch Stage" data-desc="A cosplay and performance competition celebrating iconic characters. Participants bring beloved figures from movies, memes, and pop culture to life on stage. Through costumes and engaging performances, the stage becomes a spectacle of creativity. A perfect blend of nostalgia and theatrical flair. Transform into legends and own the spotlight!
-                        " data-img="/Posters/glitch stage.webp" data-img2="./assets/img3.webp">
-                        <img src="/Posters/glitch stage.webp" class="slide-link" alt="img2" />
-                        <a href="https://www.canva.com/design/DAGbojHwYRU/ftn0O_2rLWTFxSYLXdUZqw/view?utm_content=DAGbojHwYRU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hea4cd578c3"
-                            target="_blank" class="rule-link">[ Register ]</a>
-                        <div class="slide-link">View</div>
-                    </div>
-                    <div class="slide" data-title="Theatrical Futures"
-                        data-desc="A skit competition exploring the future shaped by technology. Teams present innovative stories, from AI-driven societies to virtual reality escapades. This thought-provoking event combines creativity and technical imagination. Celebrate the convergence of drama and innovation. Witness the future, one act at a time!"
-                        data-img="/Posters/Thearitical Futures.webp" data-img2="./assets/img3.webp">
-                        <img src="/Posters/Thearitical Futures.webp" class="slide-link" alt="img2" />
-                        <a href="https://www.canva.com/design/DAGbojHwYRU/ftn0O_2rLWTFxSYLXdUZqw/view?utm_content=DAGbojHwYRU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hea4cd578c3"
-                            target="_blank" class="rule-link">[ Register ]</a>
-                        <div class="slide-link">View</div>
-                    </div>
-                    <a href="technical-events.html">
-                        <div class="slide">
-                            <img src="/Posters/tech-nav.webp" alt="img3" />
-                        </div>
-                    </a>
-                    <a href="non-technical.html">
-                        <div class="slide">
-                            <img src="/Posters/non-tech-nav.webp" alt="img3" />
-                        </div>
-                    </a>
-
-
-
-
-                </div>
-            </div>
-
-
-            <div class="one-desc">
-
-                <div class="content-wrapper">
-                    <div class="close-container">
-                        <div class="one-desc-close shuffle-text">[CLOSE]</div>
-                    </div>
-
-
-
-                    <p class="title-text"></p>
-                    <div class="event-images">
-                        <img class="desc-img" src="" alt="Slide Image" />
-                        <img class="desc-img2" src="" alt="Slide Image" />
-                    </div>
-                    <p class="desc-text"></p>
-
-
-
-                </div>
-            </div>
-
-
-            <!-- content ends here -->
-
-
-
+        <div class="h-scroll phone-scroll-text">
+          Navigate by scrolling sideways to discover events.
         </div>
+
+        <div class="items"></div>
+      </div>
+
+      <div class="section-1">
+        <img src="../assets/noise-2.gif" class="noise" />
+        <audio
+          id="hover-music"
+          src="./music/link-music.wav"
+          preload="auto"
+        ></audio>
+        <div id="flicker" class="scroll-text">Scroll</div>
+
+        <div class="h-scroll-fix laptop-scroll-text">
+          Navigate by scrolling to discover events.
+        </div>
+
+        <div class="h-scroll-fix phone-scroll-text">
+          Navigate by scrolling sideways to discover events.
+        </div>
+
+        <!-- Header -->
+        <nav class="navbar href-music">
+          <div class="navbar-left">
+            <!-- Logo Link -->
+            <a href="../index.html" class="nav-logo">
+              <img src="/imgs/official.webp" alt="Logo" class="logo" />
+            </a>
+            <!-- Navigation Links -->
+            <a
+              href="https://www.google.com/search?q=srm+ap+&sca_esv=37b8e5acbf81c988&sxsrf=ADLYWIL5sVBdyU7Lw-a7R9cV0T3xBOKLEg%3A1736312214056&ei=lgV-Z8eNA4uW4-EPv4m-0Qw&ved=0ahUKEwjHsPOFq-WKAxULyzgGHb-EL8oQ4dUDCBA&uact=5&oq=srm+ap+&gs_lp=Egxnd3Mtd2l6LXNlcnAiB3NybSBhcCAyChAjGIAEGCcYigUyBRAAGIAEMgUQABiABDIFEC4YgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgoQABiABBgUGIcCMgUQABiABEi3BlDQBFjQBHACeAGQAQCYAVigAViqAQExuAEDyAEA-AEBmAIDoAJgwgIKEAAYsAMY1gQYR8ICDRAuGIAEGLADGEMYigWYAwCIBgGQBgmSBwEzoAfyCA&sclient=gws-wiz-serp"
+              class="nav-link"
+              id="timeDisplay"
+            ></a>
+          </div>
+          <div class="navbar-right">
+            <div class="navbar-effect">
+              <a
+                href="#"
+                class="nav-link href-music menu-button"
+                id="menu-button"
+                aria-label="Open menu"
+                >Menu</a
+              >
+            </div>
+          </div>
+        </nav>
+
+        <!-- NEW MENU OVERLAY -->
+        <div class="menu-overlay" id="menu-overlay">
+          <!-- Red Slide -->
+          <div class="red-slide"></div>
+
+          <!-- Menu Content -->
+          <div class="menu-content">
+            <!-- Left Side Menu Options -->
+            <div class="menu-left">
+              <div class="menu-item">
+                <div class="menu-item-link">
+                  <div class="bg-hover"></div>
+                  <a href="../index.html" class="menu-left-item">Home</a>
+                </div>
+                <!-- <span>01</span> -->
+              </div>
+              <div class="menu-item">
+                <div class="menu-item-link">
+                  <div class="bg-hover"></div>
+                  <a href="Events.html" class="menu-left-item">Events</a>
+                </div>
+                <!-- <span>02</span> -->
+              </div>
+              <div class="menu-item">
+                <div class="menu-item-link">
+                  <div class="bg-hover"></div>
+                  <a href="proshows.html" class="menu-left-item">Proshows</a>
+                </div>
+                <!-- <span>03</span> -->
+              </div>
+              <div class="menu-item">
+                <div class="menu-item-link">
+                  <div class="bg-hover"></div>
+                  <a href="aboutus.html" class="menu-left-item">About</a>
+                </div>
+                <!-- <span>04</span> -->
+              </div>
+              <div class="menu-item">
+                <div class="menu-item-link">
+                  <div class="bg-hover"></div>
+                  <a href="teams.html" class="menu-left-item">Team</a>
+                </div>
+                <!-- <span>05</span> -->
+              </div>
+              <div class="menu-item">
+                <div class="menu-item-link">
+                  <div class="bg-hover"></div>
+                  <a href="https://hacksrm25.vercel.app/" class="menu-left-item"
+                    >Hacksrm</a
+                  >
+                </div>
+                <!-- <span>06</span> -->
+              </div>
+              <div class="menu-item">
+                <div class="menu-item-link">
+                  <div class="bg-hover"></div>
+                  <a href="faq.html" class="menu-left-item">FAQs</a>
+                </div>
+                <!-- <span>07</span> -->
+              </div>
+            </div>
+
+            <!-- Right Side Content -->
+            <div class="menu-right">
+              <!-- Close Button -->
+              <button class="menu-close" id="menu-close">CLOSE</button>
+
+              <!-- Video Container -->
+              <div class="menu-video-container">
+                <video class="menu-video" autoplay muted loop>
+                  <source src="/assets/videos/video-01.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+
+              <!-- Bottom Options -->
+              <div class="menu-bottom-options">
+                <div class="bottom-options">
+                  <a href="./public/aboutus.html">About</a>
+                  <a href="./public/cultural-events.html">Cultural</a>
+                </div>
+                <div class="bottom-options">
+                  <a href="">Non-Technical</a>
+                  <a href="">Technical</a>
+                </div>
+                <div class="bottom-options">
+                  <a href="">Instagram</a>
+                  <a href="">Linktree</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- content goes here -->
+
+        <div class="slider">
+          <div class="slider-wrapper">
+            <!-- Original slides (we will clone them dynamically) -->
+            <div
+              class="slide"
+              data-title="Cyber Sway"
+              data-desc="A national-level dance competition celebrating creativity and expression. From classical solos to high-energy western group acts, participants showcase diverse styles. The stage is set for artistry, passion, and innovation to shine. Bring your best moves and mesmerize the crowd. Dance your way to glory at INFINITUS!"
+              data-img="/Posters/Cybersway.webp"
+              data-img2="./assets/img2.webp"
+            >
+              <img
+                src="/Posters/Cybersway.webp"
+                alt="img1"
+                class="slide-link"
+              />
+              <a
+                href="https://www.canva.com/design/DAGboj7tDbE/F3lgkvXe1lQbZqiZiv6CrA/view?utm_content=DAGboj7tDbE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc3341a9ace"
+                target="_blank"
+                class="rule-link"
+                >[ Register ]</a
+              >
+              <div class="slide-link">View</div>
+            </div>
+            <div
+              class="slide"
+              data-title="Cyber Groove' 25"
+              data-desc="An electrifying music competition hosted by OneHeart, SRM's Music Club. This platform brings together talent from across genres like classical, pop, rock, and fusion. Experience soul-stirring performances that celebrate rhythm and harmony. A stage for aspiring musicians to shine. Let music echo your passion at INFINITUS!"
+              data-img="/Posters/Cyber groove.webp"
+              data-img2="./assets/img3.webp"
+            >
+              <img
+                src="/Posters/Cyber groove.webp"
+                class="slide-link"
+                alt="img2"
+              />
+              <a
+                href="https://www.canva.com/design/DAGbojHwYRU/ftn0O_2rLWTFxSYLXdUZqw/view?utm_content=DAGbojHwYRU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hea4cd578c3"
+                target="_blank"
+                class="rule-link"
+                >[ Register ]</a
+              >
+              <div class="slide-link">View</div>
+            </div>
+            <div
+              class="slide"
+              data-title="Cyber Vogue"
+              data-desc="A fashion walk competition celebrating style, individuality, and confidence. Participants flaunt their unique flair through themed rounds like Cyberpunk Fusion and Rapid-Fire Fashion. From power walks to creative talents, this event highlights bold personalities. A celebration of self-expression and creativity. Walk the runway, own the stage, and dazzle the crowd!"
+              data-img="/Posters/Cyber vogue.webp"
+              data-img2="./assets/img4.webp"
+            >
+              <img
+                src="/Posters/Cyber vogue.webp"
+                class="slide-link"
+                alt="img3"
+              />
+              <a
+                href="https://www.canva.com/design/DAGbouseUNo/t0YSF3PsXyUQ2kXdQKDUVg/view?utm_content=DAGbouseUNo&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h58ef2f0f30"
+                target="_blank"
+                class="rule-link"
+                >[ Register ]</a
+              >
+              <div class="slide-link">View</div>
+            </div>
+
+            <div
+              class="slide"
+              data-title="The Glitch Stage"
+              data-desc="A cosplay and performance competition celebrating iconic characters. Participants bring beloved figures from movies, memes, and pop culture to life on stage. Through costumes and engaging performances, the stage becomes a spectacle of creativity. A perfect blend of nostalgia and theatrical flair. Transform into legends and own the spotlight!
+                        "
+              data-img="/Posters/glitch stage.webp"
+              data-img2="./assets/img3.webp"
+            >
+              <img
+                src="/Posters/glitch stage.webp"
+                class="slide-link"
+                alt="img2"
+              />
+              <a
+                href="https://www.canva.com/design/DAGbojHwYRU/ftn0O_2rLWTFxSYLXdUZqw/view?utm_content=DAGbojHwYRU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hea4cd578c3"
+                target="_blank"
+                class="rule-link"
+                >[ Register ]</a
+              >
+              <div class="slide-link">View</div>
+            </div>
+            <div
+              class="slide"
+              data-title="Theatrical Futures"
+              data-desc="A skit competition exploring the future shaped by technology. Teams present innovative stories, from AI-driven societies to virtual reality escapades. This thought-provoking event combines creativity and technical imagination. Celebrate the convergence of drama and innovation. Witness the future, one act at a time!"
+              data-img="/Posters/Thearitical Futures.webp"
+              data-img2="./assets/img3.webp"
+            >
+              <img
+                src="/Posters/Thearitical Futures.webp"
+                class="slide-link"
+                alt="img2"
+              />
+              <a
+                href="https://www.canva.com/design/DAGbojHwYRU/ftn0O_2rLWTFxSYLXdUZqw/view?utm_content=DAGbojHwYRU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hea4cd578c3"
+                target="_blank"
+                class="rule-link"
+                >[ Register ]</a
+              >
+              <div class="slide-link">View</div>
+            </div>
+            <a href="technical-events.html">
+              <div class="slide">
+                <img src="/Posters/tech-nav.webp" alt="img3" />
+              </div>
+            </a>
+            <a href="non-technical.html">
+              <div class="slide">
+                <img src="/Posters/non-tech-nav.webp" alt="img3" />
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="one-desc">
+          <div class="content-wrapper">
+            <div class="close-container">
+              <div class="one-desc-close shuffle-text">[CLOSE]</div>
+            </div>
+
+            <p class="title-text"></p>
+            <div class="event-images">
+              <img class="desc-img" src="" alt="Slide Image" />
+              <img class="desc-img2" src="" alt="Slide Image" />
+            </div>
+            <p class="desc-text"></p>
+          </div>
+        </div>
+
+        <!-- content ends here -->
+      </div>
     </div>
 
     <script src="/scripts/events-loader.js"></script>
-    <script src="/scripts/cursor-follow.js"></script>
+
     <script src="/scripts/favicon.js"></script>
     <script src="/scripts/cursor.js"></script>
     <script src="/scripts/menu.js"></script>
@@ -286,99 +350,98 @@
     <script src="/scripts/scroll-text.js"></script>
 
     <script>
-        // Menu functionality adapted from aboutus.html
-        const menuButton = document.getElementById("menu-button");
-        const menuOverlay = document.getElementById("menu-overlay");
-        const menuClose = document.getElementById("menu-close");
+      // Menu functionality adapted from aboutus.html
+      const menuButton = document.getElementById("menu-button");
+      const menuOverlay = document.getElementById("menu-overlay");
+      const menuClose = document.getElementById("menu-close");
 
-        let menuOpen = false;
-        let isMenuClosing = false;
-        let scrollLocked = false;
+      let menuOpen = false;
+      let isMenuClosing = false;
+      let scrollLocked = false;
 
-        function openMenu() {
-            if (isMenuClosing) return;
+      function openMenu() {
+        if (isMenuClosing) return;
 
-            menuOpen = true;
-            isMenuClosing = false;
+        menuOpen = true;
+        isMenuClosing = false;
 
-            // Remove closing class if it exists
-            menuOverlay.classList.remove("closing");
+        // Remove closing class if it exists
+        menuOverlay.classList.remove("closing");
 
-            // Hide menu button immediately
-            menuButton.style.opacity = "0";
-            menuButton.style.pointerEvents = "none";
+        // Hide menu button immediately
+        menuButton.style.opacity = "0";
+        menuButton.style.pointerEvents = "none";
 
-            // Add active class after a tiny delay to ensure CSS reset
-            setTimeout(() => {
-                menuOverlay.classList.add("active");
-            }, 10);
+        // Add active class after a tiny delay to ensure CSS reset
+        setTimeout(() => {
+          menuOverlay.classList.add("active");
+        }, 10);
 
-            // Disable main scroll when menu is open
-            scrollLocked = true;
-            document.body.style.overflow = "hidden";
+        // Disable main scroll when menu is open
+        scrollLocked = true;
+        document.body.style.overflow = "hidden";
 
-            // Play menu video if available
-            const menuVideo = document.querySelector(".menu-video");
-            if (menuVideo) {
-                menuVideo.play().catch((e) => {
-                    console.log("Menu video play failed:", e);
-                });
-            }
+        // Play menu video if available
+        const menuVideo = document.querySelector(".menu-video");
+        if (menuVideo) {
+          menuVideo.play().catch((e) => {
+            console.log("Menu video play failed:", e);
+          });
+        }
+      }
+
+      function closeMenu() {
+        if (!menuOpen || isMenuClosing) return;
+
+        isMenuClosing = true;
+
+        // Start closing animation
+        menuOverlay.classList.add("closing");
+        menuOverlay.classList.remove("active");
+
+        // Show menu button with delay
+        setTimeout(() => {
+          menuButton.style.opacity = "1";
+          menuButton.style.pointerEvents = "auto";
+        }, 400);
+
+        // Pause menu video if available
+        const menuVideo = document.querySelector(".menu-video");
+        if (menuVideo) {
+          menuVideo.pause();
         }
 
-        function closeMenu() {
-            if (!menuOpen || isMenuClosing) return;
+        // Wait for animation to complete before resetting state
+        setTimeout(() => {
+          menuOpen = false;
+          isMenuClosing = false;
+          menuOverlay.classList.remove("closing");
 
-            isMenuClosing = true;
+          // Re-enable main scroll when menu is closed
+          scrollLocked = false;
+          document.body.style.overflow = "";
+        }, 900);
+      }
 
-            // Start closing animation
-            menuOverlay.classList.add("closing");
-            menuOverlay.classList.remove("active");
+      // Event Listeners
+      if (menuButton) menuButton.addEventListener("click", openMenu);
+      if (menuClose) menuClose.addEventListener("click", closeMenu);
 
-            // Show menu button with delay
-            setTimeout(() => {
-                menuButton.style.opacity = "1";
-                menuButton.style.pointerEvents = "auto";
-            }, 400);
-
-            // Pause menu video if available
-            const menuVideo = document.querySelector(".menu-video");
-            if (menuVideo) {
-                menuVideo.pause();
-            }
-
-            // Wait for animation to complete before resetting state
-            setTimeout(() => {
-                menuOpen = false;
-                isMenuClosing = false;
-                menuOverlay.classList.remove("closing");
-
-                // Re-enable main scroll when menu is closed
-                scrollLocked = false;
-                document.body.style.overflow = "";
-            }, 900);
+      // Close menu on escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && menuOpen && !isMenuClosing) {
+          closeMenu();
         }
+      });
 
-        // Event Listeners
-        if (menuButton) menuButton.addEventListener("click", openMenu);
-        if (menuClose) menuClose.addEventListener("click", closeMenu);
-
-        // Close menu on escape key
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && menuOpen && !isMenuClosing) {
-                closeMenu();
-            }
+      // Close menu when clicking on menu overlay background
+      if (menuOverlay) {
+        menuOverlay.addEventListener("click", (e) => {
+          if (e.target === menuOverlay && menuOpen && !isMenuClosing) {
+            closeMenu();
+          }
         });
-
-        // Close menu when clicking on menu overlay background
-        if (menuOverlay) {
-            menuOverlay.addEventListener("click", (e) => {
-                if (e.target === menuOverlay && menuOpen && !isMenuClosing) {
-                    closeMenu();
-                }
-            });
-        }
+      }
     </script>
-</body>
-
+  </body>
 </html>

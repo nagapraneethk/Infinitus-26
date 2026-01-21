@@ -1758,15 +1758,37 @@ h4 {
 
 /* Bottom Options */
 .menu-bottom-options {
+  width: 70%;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  justify-content: space-between;
+ 
   gap: 130px;
   margin-top: 10px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.4s, transform 0.4s;
 }
+
+
+.bottom-options{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bottom-options a{
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+
+}
+.bottom-options a:hover{
+  color: #ff0000; 
+}
+
 
 .menu-overlay.active .menu-bottom-options {
   opacity: 1;
@@ -2687,3 +2709,5 @@ marquee {
   font-size: 50px;
 
 }
+
+
