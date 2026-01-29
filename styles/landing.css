@@ -270,8 +270,8 @@ body {
 }
 
 .register-button:hover {
-    background-color: white;
-    color: black;
+    background-color: rgb(146, 0, 0);
+    color: white;
 }
 
 /* Bottom Right Location */
