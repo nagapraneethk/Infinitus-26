@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", init);
     // Data for questions and answers
     const questionData = {
       registration: [
-        { question: "How do I register for Infinitus?", answer: "Through our ticketing partner unifest." },
+        { question: "How do I register for Infinitus?", answer: "Through our ticketing partner Unstop." },
         { question: "Is the registration free of cost?", answer: "It is free of cost for SRM students though some events have charges." },
         { question: "How much is the event registration fee for students from other universities?", answer: "It is variable based on events ranging from 100 to 300." },
         { question: "When does the registration end?", answer: "Some competitions registrations end on feb 1st, others are open for on spot registrations." },
@@ -127,10 +127,10 @@ document.addEventListener("DOMContentLoaded", init);
       ],
       verification: [
         { question: "What is required for identity verification?", answer: "College id card is mandatory for campus entrance." },
-        { question: "Do we get a registration confirmation mail?", answer: "Yes, you will get a mail from unifest after payment confirmation." },
+        { question: "Do we get a registration confirmation mail?", answer: "Yes, you will get a mail from Unstop after payment confirmation." },
       ],
       participation: [
-        { question: "Is there a separate participation fee for outside students?", answer: "Yes, it can be found on our ticketing platform, unifest" },
+        { question: "Is there a separate participation fee for outside students?", answer: "Yes, it can be found on our ticketing platform, Unstop" },
         { question: "How do I contact organizers regarding any questions or concerns?", answer: "You can reach out to the organizers at sc@srmap.edu.in for any questions or concerns." },
       ],
       accommodation: [
@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded", init);
       // Data for questions and answers
       const questionData = {
         registration: [
-          { question: "How do I register for Infinitus?", answer: "Through our ticketing partner unifest." },
+          { question: "How do I register for Infinitus?", answer: "Through our ticketing partner Unstop." },
           { question: "Is the registration free of cost?", answer: "It is free of cost for SRM students though some events have charges." },
           { question: "How much is the event registration fee for students from other universities?", answer: "It is variable based on events ranging from 100 to 300." },
           { question: "When does the registration end?", answer: "Some competitions registrations end on feb 1st, others are open for on spot registrations." },
@@ -278,10 +278,10 @@ document.addEventListener("DOMContentLoaded", init);
         ],
         verification: [
           { question: "What is required for identity verification?", answer: "College id card is mandatory for campus entrance." },
-          { question: "Do we get a registration confirmation mail?", answer: "Yes, you will get a mail from unifest after payment confirmation." },
+          { question: "Do we get a registration confirmation mail?", answer: "Yes, you will get a mail from Unstop after payment confirmation." },
         ],
         participation: [
-          { question: "Is there a separate participation fee for outside students?", answer: "Yes, it can be found on our ticketing platform, unifest" },
+          { question: "Is there a separate participation fee for outside students?", answer: "Yes, it can be found on our ticketing platform, Unstop" },
           { question: "How do I contact organizers regarding any questions or concerns?", answer: "You can reach out to the organizers at sc@srmap.edu.in for any questions or concerns." },
         ],
         accommodation: [
